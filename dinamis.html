@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Hikmah Safitri Ramadhani</title>
+    <style>
+        /* --- CSS VARIABLES (Tema Pink) --- */
+        :root {
+            --bg-color: #fdf2f8;         /* Pink sangat muda untuk background */
+            --card-bg: #ffffff;          /* Putih untuk kartu */
+            --text-primary: #4a0e2a;     /* Merah marun tua untuk teks utama (kontras bagus) */
+            --text-secondary: #9d4edd;   /* Ungu-pink lembut untuk teks sekunder */
+            --accent-color: #ec4899;     /* Pink cerah (Tailwind Pink-500) untuk aksen */
+            --accent-hover: #db2777;     /* Pink lebih gelap untuk hover */
+            --border-color: #fbcfe8;     /* Pink muda untuk border */
+            --shadow: 0 8px 16px rgba(236, 72, 153, 0.1); /* Bayangan bernuansa pink */
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a0b12;         /* Pink sangat gelap (hampir hitam) */
+            --card-bg: #2d121f;          /* Merah marun gelap */
+            --text-primary: #fce7f3;     /* Pink sangat muda untuk teks */
+            --text-secondary: #f9a8d4;   /* Pink lembut */
+            --accent-color: #f472b6;     /* Pink pastel cerah */
+            --accent-hover: #ec4899;
+            --border-color: #831843;
+            --shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        /* --- RESET & BASE STYLES --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-primary); line-height: 1.6; padding: 20px; }
+        
+        .container { max-width: 900px; margin: 0 auto; }
+        
+        /* --- HEADER & TOGGLE --- */
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        header h3 { color: var(--accent-color); font-weight: 700; letter-spacing: 1px; }
+        .theme-toggle { 
+            background: var(--card-bg); 
+            border: 2px solid var(--accent-color); 
+            color: var(--accent-color); 
+            padding: 8px 20px; 
+            border-radius: 25px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            font-size: 0.9rem;
+        }
+        .theme-toggle:hover { background: var(--accent-color); color: white; }
+
+        /* --- CARDS --- */
+        .card { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 25px; box-shadow: var(--shadow); border: 1px solid var(--border-color); }
+        .card h2 { color: var(--accent-color); margin-bottom: 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; font-size: 1.4rem; display: flex; align-items: center; gap: 10px; }
+
+        /* --- PROFILE & PHOTO --- */
+        .profile-header { text-align: center; margin-bottom: 25px; }
+        .profile-photo { 
+            width: 160px; 
+            height: 160px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 4px solid var(--accent-color); 
+            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3); 
+            margin-bottom: 20px; 
+            background-color: var(--border-color);
+        }
+        .profile-header h1 { font-size: 2.2rem; margin-bottom: 8px; color: var(--text-primary); }
+        .profile-header .title { color: var(--accent-color); font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; }
+        .contact-info { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; font-size: 0.95rem; color: var(--text-secondary); }
+        .contact-info span { display: flex; align-items: center; gap: 6px; background: var(--bg-color); padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border-color); }
+
+        /* --- GRID LAYOUTS --- */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+
+        /* --- LISTS & ITEMS --- */
+        .item { margin-bottom: 20px; padding-left: 15px; border-left: 3px solid var(--accent-color); }
+        .item-header { display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 5px; color: var(--text-primary); }
+        .item-sub { color: var(--accent-color); font-size: 0.95rem; font-weight: 600; margin-bottom: 5px; }
+        .item-desc { font-size: 0.95rem; color: var(--text-secondary); }
+
+        /* --- SKILLS BARS --- */
+        .skill-item { margin-bottom: 18px; }
+        .skill-header { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+        .progress-bar { width: 100%; height: 12px; background: var(--border-color); border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent-color), var(--accent-hover)); width: 0%; border-radius: 10px; transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1); }
+
+        /* --- TAGS (Minat & Hobi) --- */
+        .tags { display: flex; flex-wrap: wrap; gap: 12px; }
+        .tag { 
+            background: var(--bg-color); 
+            color: var(--accent-color); 
+            padding: 8px 16px; 
+            border-radius: 25px; 
+            font-size: 0.9rem; 
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            transition: transform 0.2s;
+        }
+        .tag:hover { transform: translateY(-3px); background: var(--accent-color); color: white; border-color: var(--accent-color); }
+
+        /* --- ANIMATION CLASS --- */
+        .fade-in { opacity: 0; transform: translateY(25px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <button class="theme-toggle" id="themeToggle"> Mode Gelap</button>
+        </header>
+
+        <!-- Profil -->
+        <section class="card fade-in" id="profile-section"></section>
+
+        <div class="grid-2">
+            <!-- Pendidikan -->
+            <section class="card fade-in" id="education-section">
+                <h2>🎓 Pendidikan</h2>
+                <div id="education-list"></div>
+            </section>
+
+            <!-- Pengalaman -->
+            <section class="card fade-in" id="experience-section">
+                <h2>💼 Pengalaman</h2>
+                <div id="experience-list"></div>
+            </section>
+        </div>
+
+        <div class="grid-2">
+            <!-- Keahlian -->
+            <section class="card fade-in" id="skills-section">
+                <h2>🛠️ Keahlian</h2>
+                <div id="skills-list"></div>
+            </section>
+
+            <!-- Bahasa -->
+            <section class="card fade-in" id="languages-section">
+                <h2>🌐 Bahasa</h2>
+                <div id="languages-list"></div>
+            </section>
+        </div>
+
+        <div class="grid-2">
+            <!-- Minat -->
+            <section class="card fade-in" id="interests-section">
+                <h2>💡 Minat</h2>
+                <div class="tags" id="interests-list"></div>
+            </section>
+
+            <!-- Hobi -->
+            <section class="card fade-in" id="hobbies-section">
+                <h2>🎯 Hobi</h2>
+                <div class="tags" id="hobbies-list"></div>
+            </section>
+        </div>
+
+        <!-- Penghargaan -->
+        <section class="card fade-in" id="awards-section">
+            <h2>🏆 Penghargaan & Sertifikasi</h2>
+            <div id="awards-list"></div>
+        </section>
+    </div>
+
+    <script>
+        // ==========================================
+        // 1. DATA SUMBER (Termasuk Foto)
+        // ==========================================
+        const cvData = {
+            // GANTI URL DI BAWAH INI DENGAN LINK/NAMA FILE FOTO ANDA
+            // Contoh: "foto-saya.jpg" (jika file ada di folder yang sama) 
+            // atau "https://link-foto-anda.com/foto.jpg"
+            photo: "foto.jpeg", 
+            
+            name: "Hikmah Safitri Ramadhani",
+            title: "Mahasiswa Ilmu Komputer · Universitas Pattimura",
+            contact: [
+                { icon: "📍", text: "Stain, Lorong Putri, Ambon, Maluku 97128" },
+                { icon: "📞", text: "+62 813-4104-2151" },
+                { icon: "✉️", text: "hkmsftr13@email.com" },
+                { icon: "🌐", text: "github.com/hkmsftr13-art" }
+            ],
+            profile: "Mahasiswa aktif Ilmu Komputer Universitas Pattimura dengan IPK 3.53/4.00 yang memiliki minat mendalam di bidang teknologi informasi dan pengembangan perangkat lunak. Terampil dalam analisis data menggunakan Python dan memiliki kemampuan komunikasi publik yang baik. Berkomitmen untuk terus berkembang dan memberikan kontribusi nyata di dunia digital, khususnya bagi masyarakat Indonesia Timur.",
+            education: [
+                { period: "2024 – Sekarang", degree: "S1 Ilmu Komputer", institution: "Universitas Pattimura, Ambon", detail: "IPK: 3.53 / 4.00 — Sedang berjalan" },
+                { period: "2021 – 2024", degree: "MA Negeri 1 Ambon", institution: "Jurusan IPA", detail: "Nilai rata-rata: 91.4" },
+                { period: "2018 – 2021", degree: "SMP Negeri 17 Marusu", institution: "", detail: "Nilai rata-rata: 91.4" }
+            ],
+            experience: [
+                { period: "2024 – Sekarang", role: "Anggota Aktif Organisasi", institution: "Himpunan Mahasiswa Ilmu Komputer — Unpatti", detail: "Aktif berpartisipasi dalam kegiatan akademik dan sosial himpunan mahasiswa." }
+            ],
+            skills: [
+                { name: "Microsoft Office", level: 85 },
+                { name: "Python / R", level: 75 },
+                { name: "Komunikasi Publik", level: 75 }
+            ],
+            languages: [
+                { name: "Bahasa Indonesia", level: "Mahir (C2)" },
+                { name: "Bahasa Ambon", level: "Lanjut (B2)" },
+                { name: "Bahasa Bugis/Makassar", level: "Penutur Asli" }
+            ],
+            interests: ["💻 Teknologi", "🔬 Riset", "🌿 Lingkungan", "✍️ Penulisan", "👥 Kepemimpinan"],
+            hobbies: ["🏸 Badminton", "🎬 Maraton Film", "🎧 Mendengarkan Musik"],
+            awards: ["Sertifikasi Python — Dicoding"]
+        };
+
+        // ==========================================
+        // 2. FUNGSI RENDER
+        // ==========================================
+        function renderCV() {
+            // Render Profil + FOTO
+            const profileHTML = `
+                <div class="profile-header">
+                    <img src="${cvData.photo}" alt="Foto Profil ${cvData.name}" class="profile-photo" onerror="this.src='https://via.placeholder.com/160/ec4899/ffffff?text=Foto+Error'">
+                    <h1>${cvData.name}</h1>
+                    <div class="title">${cvData.title}</div>
+                    <div class="contact-info">
+                        ${cvData.contact.map(c => `<span>${c.icon} ${c.text}</span>`).join('')}
+                    </div>
+                </div>
+                <p style="text-align: justify; color: var(--text-secondary);">${cvData.profile}</p>
+            `;
+            document.getElementById('profile-section').innerHTML = profileHTML;
+
+            // Render Pendidikan
+            document.getElementById('education-list').innerHTML = cvData.education.map(edu => `
+                <div class="item">
+                    <div class="item-header"><span>${edu.degree}</span> <span>${edu.period}</span></div>
+                    <div class="item-sub">${edu.institution}</div>
+                    <div class="item-desc">${edu.detail}</div>
+                </div>
+            `).join('');
+
+            // Render Pengalaman
+            document.getElementById('experience-list').innerHTML = cvData.experience.map(exp => `
+                <div class="item">
+                    <div class="item-header"><span>${exp.role}</span> <span>${exp.period}</span></div>
+                    <div class="item-sub">${exp.institution}</div>
+                    <div class="item-desc">${exp.detail}</div>
+                </div>
+            `).join('');
+
+            // Render Keahlian
+            document.getElementById('skills-list').innerHTML = cvData.skills.map((skill, index) => `
+                <div class="skill-item">
+                    <div class="skill-header"><span>${skill.name}</span><span>${skill.level}%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="skill-${index}" data-width="${skill.level}%"></div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Render Bahasa
+            document.getElementById('languages-list').innerHTML = cvData.languages.map(lang => `
+                <div class="item">
+                    <div class="item-header"><span>${lang.name}</span></div>
+                    <div class="item-sub">${lang.level}</div>
+                </div>
+            `).join('');
+
+            // Render Minat & Hobi
+            document.getElementById('interests-list').innerHTML = cvData.interests.map(i => `<span class="tag">${i}</span>`).join('');
+            document.getElementById('hobbies-list').innerHTML = cvData.hobbies.map(h => `<span class="tag">${h}</span>`).join('');
+
+            // Render Penghargaan
+            document.getElementById('awards-list').innerHTML = cvData.awards.map(award => `
+                <div class="item" style="border-left-color: #f59e0b;">🏅 ${award}</div>
+            `).join('');
+        }
+
+        // ==========================================
+        // 3. INTERAKTIVITAS
+        // ==========================================
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            themeToggle.textContent = newTheme === 'dark' ? ' Mode Terang' : ' Mode Gelap';
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    if (entry.target.id === 'skills-section') {
+                        document.querySelectorAll('.progress-fill').forEach(bar => {
+                            bar.style.width = bar.getAttribute('data-width');
+                        });
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // ==========================================
+        // 4. INISIALISASI
+        // ==========================================
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCV();
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
